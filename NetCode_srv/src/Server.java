@@ -87,19 +87,18 @@ public class Server extends Frame implements Runnable {
 		
 	}
 	
-	public void sendMessageToAllClients() {
-		byte[] sendMess = new byte [5000];
+	public void sendMessageToAllClients(byte [] data) {
 		for (ServerThread s : serverThreads) {
-			sendMess = new String(prikazivac.getText()).getBytes();
-			DatagramPacket sendPacket = new DatagramPacket(sendMess,sendMess.length,s.getClientAddress(),s.getClientPort());
+//			sendMess = new String(prikazivac.getText()).getBytes();
+			DatagramPacket sendPacket = new DatagramPacket(data,data.length,s.getClientAddress(),s.getClientPort());
 			try {
 				sendSocket.send(sendPacket);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			for (int i=0;i<sendMess.length;i++) {
-				sendMess[i] = 0;
-			}
+//			for (int i=0;i<sendMess.length;i++) {
+//				sendMess[i] = 0;
+//			}
 		}
 	}
 	

@@ -39,7 +39,7 @@ public class ServerThread extends Thread {
 			
 		
 		System.out.println(socketCommunication.getLocalPort());
-		byte[] recieveData = new byte [10000];
+		byte[] recieveData = new byte [200];
 		
 		while(!interrupted()){
 			synchronized (this) {
@@ -52,11 +52,13 @@ public class ServerThread extends Thread {
 				
 				if(server.getKraj() || interrupted()) break;
 				
-				String message = new String( recievePacket.getData()).trim();
-				System.out.println("Nit na portu "+socketCommunication.getLocalPort()+" je primila paket!");
-				server.getPrikazivac().setText(message); // postavlja message u prikazivac na serveru
+				Data data = Data.read(recievePacket.getData());
 				
-				server.sendMessageToAllClients();
+		//		String message = new String( recievePacket.getData()).trim();
+				System.out.println("Nit na portu "+socketCommunication.getLocalPort()+" je primila paket!");
+				server.getPrikazivac().setText(data.toString()); // postavlja message u prikazivac na serveru
+				
+				server.sendMessageToAllClients(recievePacket.getData());
 				
 				for (int i=0;i<recieveData.length;i++) {
 					recieveData[i] = 0;

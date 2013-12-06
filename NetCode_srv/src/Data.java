@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 
+@SuppressWarnings("serial")
 public class Data implements Serializable {
 	private String data;
 	
@@ -14,7 +15,7 @@ public class Data implements Serializable {
 	
 	public String getData() {
 		return data;
-	}
+	} 
 	
 	public void setData(String s) {
 		data = s;

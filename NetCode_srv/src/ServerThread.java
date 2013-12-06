@@ -39,7 +39,7 @@ public class ServerThread extends Thread {
 			
 		
 		System.out.println(socketCommunication.getLocalPort());
-		byte[] recieveData = new byte [200];
+		byte[] recieveData = new byte [2000];
 		
 		while(!interrupted()){
 			synchronized (this) {
